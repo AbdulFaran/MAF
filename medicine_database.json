@@ -1,0 +1,30 @@
+[
+  {
+    "id": "paracetamol",
+    "brand": "Paracetamol",
+    "generic": "Paracetamol (acetaminophen)",
+    "category": "Pain reliever / fever reducer",
+    "forms": "Tablet, syrup, other formulations",
+    "uses": "General information for fever and mild-to-moderate pain.",
+    "age": "Age suitability depends on the exact product, strength, and child’s age/weight. Check the product label or ask a pharmacist/doctor.",
+    "pregnancy": "Pregnancy decisions should be based on the individual situation and current professional guidance.",
+    "sideEffects": "Usually well tolerated when used correctly; excessive intake can cause serious liver injury.",
+    "warnings": "Do not combine products containing the same active ingredient. Follow the package/prescriber instructions.",
+    "interactions": "Tell a healthcare professional about other medicines and liver disease.",
+    "source": "Example record — verify against current local product information before clinical use."
+  },
+  {
+    "id": "ibuprofen",
+    "brand": "Ibuprofen",
+    "generic": "Ibuprofen",
+    "category": "NSAID pain reliever / anti-inflammatory",
+    "forms": "Tablet, capsule, suspension and other formulations",
+    "uses": "General information for pain, inflammation and fever.",
+    "age": "Age suitability varies by product and age/weight. Some children should not receive it; confirm the exact product guidance.",
+    "pregnancy": "Pregnancy requires special caution; ask a healthcare professional before use, particularly later in pregnancy.",
+    "sideEffects": "Can cause stomach upset; NSAIDs can cause serious gastrointestinal, kidney and cardiovascular problems in some people.",
+    "warnings": "Extra caution may be needed with ulcers, kidney disease, dehydration, certain heart conditions, or blood thinners.",
+    "interactions": "Check for interactions with anticoagulants, other NSAIDs and other medicines.",
+    "source": "Example record — verify against current local product information before clinical use."
+  }
+]

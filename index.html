@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Muskan — AI Health Assistant</title>
+<meta name="theme-color" content="#0878d8">
+<style>
+:root{--blue:#0878d8;--blue2:#0754b8;--green:#20c77a;--bg:#f3faff;--ink:#12345a;--muted:#6b8198;--card:#fff;--danger:#ef3340;--pink:#ef6fb1}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(180deg,#eaf7ff,#fff 35%);color:var(--ink)}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
+.app{max-width:480px;margin:auto;min-height:100vh;background:var(--bg);box-shadow:0 0 35px #c9e1f0}
+.top{padding:18px 18px 12px;background:linear-gradient(135deg,#0579dd,#0754b8);color:white;border-radius:0 0 26px 26px;position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(145deg,#08a7e8,#20c77a);display:grid;place-items:center;font-size:26px;box-shadow:0 6px 18px #003b7860}.brand h1{font-size:27px;margin:0}.brand small{opacity:.85}
+.actions{margin-left:auto;display:flex;gap:7px}.iconbtn{background:#ffffff22;color:#fff;border:1px solid #ffffff33;width:38px;height:38px;border-radius:12px}
+main{padding:16px 16px 92px}.hero{background:linear-gradient(135deg,#fff,#e8f7ff);border-radius:22px;padding:17px;display:flex;gap:12px;align-items:center;box-shadow:0 8px 25px #9ac8df38}.doctor{width:88px;height:100px;border-radius:50%;background:linear-gradient(#bdeaff,#fff);display:grid;place-items:center;font-size:55px;border:4px solid #d4f1ff}.hero h2{margin:0 0 5px;font-size:22px}.hero p{margin:0;color:var(--muted);font-size:13px}
+.primary{margin-top:14px;width:100%;padding:15px;border-radius:16px;background:linear-gradient(135deg,#0878e5,#0759c5);color:#fff;font-weight:800;box-shadow:0 7px 18px #0878d833}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:14px}.card{background:var(--card);border-radius:17px;padding:15px;min-height:105px;box-shadow:0 5px 18px #9fc7dc2c;border:1px solid #e5f1f8;text-align:left}.card .ico{font-size:28px}.card b{display:block;margin-top:7px}.card span{font-size:11px;color:var(--muted)}
+.panel{display:none}.panel.active{display:block}.back{margin:0 0 10px;color:var(--blue);background:none;font-weight:700}.section{background:#fff;border-radius:18px;padding:15px;margin-top:12px;box-shadow:0 5px 18px #9fc7dc25}
+select,.field,input,textarea{width:100%;padding:13px;border:1px solid #d8e9f3;border-radius:13px;background:#fff;color:var(--ink);outline:none}.field{margin-top:9px}.langchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.chip{padding:9px 12px;border-radius:20px;background:#edf8ff;color:#0759a9;border:1px solid #d5edf9}.chip.active{background:#0878d8;color:white}
+.chat{height:55vh;overflow:auto;display:flex;flex-direction:column;gap:9px;padding:5px}.bubble{max-width:85%;padding:11px 13px;border-radius:16px;line-height:1.4;font-size:14px}.ai{background:#e8f5ff;align-self:flex-start}.me{background:#0878d8;color:#fff;align-self:flex-end}.chatbar{display:flex;gap:7px;margin-top:9px}.chatbar input{flex:1}.mic{width:48px;border-radius:13px;background:#20c77a;color:#fff}.send{width:55px;border-radius:13px;background:#0878d8;color:#fff}
+.result{padding:12px;background:#f2fbf5;border-left:4px solid var(--green);border-radius:10px;margin-top:10px;font-size:14px}.warn{background:#fff1f2;border-left-color:var(--danger)}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);background:#fff;border-top:1px solid #dbeaf3;display:flex;justify-content:space-around;padding:9px 6px calc(9px + env(safe-area-inset-bottom));z-index:10}.nav{background:none;color:#6d8295;font-size:11px}.nav.active{color:#0878d8;font-weight:800}.nav div{font-size:22px}
+.badge{display:inline-block;padding:5px 9px;background:#e8f7ef;color:#0b8b52;border-radius:20px;font-size:11px;font-weight:700}
+h3{margin:4px 0 8px}.small{font-size:12px;color:var(--muted)}.danger{background:var(--danger);color:#fff;width:100%;padding:14px;border-radius:13px;font-weight:800}.upload{border:2px dashed #b8dcec;text-align:center;padding:25px;border-radius:15px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="brand">
+  <div class="logo">💚</div><div><h1>Muskan</h1><small>Your Health • Our Care • Always</small></div>
+  <div class="actions"><button class="iconbtn" onclick="show('settings')">⚙️</button></div>
+ </div>
+</header>
+
+<main>
+<section id="home" class="panel active">
+ <div class="hero"><div class="doctor">👩‍⚕️</div><div><span class="badge">AI Doctor • Online</span><h2>Hello! I am Muskan</h2><p>Har Baat • Har Bhasha • Har Insaan Ka Health Guide.</p></div></div>
+ <button class="primary" onclick="show('chat')">🎙️ Talk to AI Doctor — Voice / Text</button>
+ <div class="grid">
+  <button class="card" onclick="show('general')"><div class="ico">💚</div><b>General Health</b><span>Health questions & guidance</span></button>
+  <button class="card" onclick="show('medicine')"><div class="ico">💊</div><b>Medicine Info</b><span>Uses & safety information</span></button>
+  <button class="card" onclick="show('diet')"><div class="ico">🥗</div><b>Diet & Fitness</b><span>Healthy lifestyle guidance</span></button>
+  <button class="card" onclick="show('pregnancy')"><div class="ico">🩷</div><b>Pregnancy & Child</b><span>Age-aware information</span></button>
+  <button class="card" onclick="show('reports')"><div class="ico">📄</div><b>Reports</b><span>Upload & understand reports</span></button>
+  <button class="card" onclick="show('emergency')"><div class="ico">🚑</div><b>Emergency</b><span>Urgent safety guidance</span></button>
+ </div>
+</section>
+
+<section id="chat" class="panel">
+ <button class="back" onclick="show('home')">← Home</button><div class="section">
+ <h3>AI Doctor <span class="badge">Online</span></h3><div class="small">Speak or type in your preferred language.</div>
+ <div id="chatbox" class="chat"><div class="bubble ai">Assalam-o-Alaikum! Main Muskan AI Doctor hoon. Aap Urdu, Roman Urdu, English ya apni pasand ki language mein baat kar sakte hain. Aap ko kis health maslay mein madad chahiye?</div></div>
+ <div class="chatbar"><input id="msg" placeholder="Apna sawal likhein..." onkeydown="if(event.key==='Enter')send()"><button class="mic" onclick="listen()">🎙️</button><button class="send" onclick="send()">➤</button></div>
+ </div>
+ <div class="section"><b>Language</b><div class="langchips" id="langs"></div></div>
+</section>
+
+<section id="medicine" class="panel"><button class="back" onclick="show('home')">← Home</button><div class="section"><h3>💊 Medicine Information</h3><input id="med" placeholder="Medicine ka naam likhein..." oninput="medInfo()"><div id="medresult" class="result">Medicine ka naam enter karein. AI information ko general guidance ke taur par use karein.</div></div></section>
+<section id="diet" class="panel"><button class="back" onclick="show('home')">← Home</button><div class="section"><h3>🥗 Diet & Fitness</h3><select><option>General healthy plan</option><option>Weight management</option><option>Diabetes-friendly eating</option><option>Heart-healthy eating</option></select><div class="result"><b>Simple daily plan</b><br>• Breakfast: oats/egg + fruit<br>• Lunch: vegetables + protein + roti/rice<br>• Evening: fruit or unsalted nuts<br>• Water regularly; activity according to your ability.</div></div></section>
+<section id="pregnancy" class="panel"><button class="back" onclick="show('home')">← Home</button><div class="section"><h3>🩷 Pregnancy & Child Care</h3><select><option>Pregnancy guidance</option><option>Child care</option><option>Age-based questions</option></select><div class="result"><b>Important:</b> Pregnancy and child-related questions should include age/gestational age and other relevant details. For urgent symptoms, contact a qualified clinician or emergency service.</div></div></section>
+<section id="reports" class="panel"><button class="back" onclick="show('home')">← Home</button><div class="section"><h3>📄 Health Reports</h3><div class="upload"><input type="file" accept=".pdf,image/*" id="report" onchange="reportName()"><p id="reporttxt">Upload a report (PDF or image)</p></div><div class="result">Future AI analysis can explain report terms in simple language. It should not replace a clinician's interpretation.</div></div></section>
+<section id="emergency" class="panel"><button class="back" onclick="show('home')">← Home</button><div class="section"><h3>🚑 Emergency Guidance</h3><div class="result warn"><b>Emergency?</b><br>Severe breathing difficulty, unconsciousness, severe chest pain, uncontrolled bleeding, seizures, or other life-threatening symptoms require urgent medical help.</div><button class="danger" onclick="alert('Please contact your local emergency service or go to the nearest emergency department.')">☎️ Get Emergency Help</button></div></section>
+<section id="general" class="panel"><button class="back" onclick="show('home')">← Home</button><div class="section"><h3>💚 General Health</h3><p class="small">Ask Muskan about symptoms, wellness, sleep, nutrition, exercise and health information.</p><button class="primary" onclick="show('chat')">Ask AI Doctor</button></div></section>
+<section id="settings" class="panel"><button class="back" onclick="show('home')">← Home</button><div class="section"><h3>⚙️ Language & Voice</h3><select id="voiceLang" onchange="setLang(this.value)"></select><p class="small">Browser voice support depends on the device and installed language voices.</p><div class="result">🔒 Privacy: this prototype keeps chat data in the current browser session only. A production version should use secure authentication and encrypted health-data storage.</div></div></section>
+</main>
+
+<nav class="bottom"><button class="nav active" onclick="show('home')"><div>⌂</div>Home</button><button class="nav" onclick="show('chat')"><div>◉</div>AI Doctor</button><button class="nav" onclick="show('reports')"><div>▣</div>Reports</button><button class="nav" onclick="show('settings')"><div>⚙</div>Profile</button></nav>
+</div>
+<script>
+const languages=[
+ ['Urdu','ur-PK'],['English','en-US'],['Hindi','hi-IN'],['Arabic','ar-SA'],['Punjabi','pa-IN'],['Sindhi','sd'],['Bengali','bn-BD'],['Pashto','ps']
+];
+let currentLang='ur-PK';
+const panels=['home','chat','medicine','diet','pregnancy','reports','emergency','general','settings'];
+function show(id){panels.forEach(x=>document.getElementById(x).classList.toggle('active',x===id));scrollTo(0,0)}
+function initLangs(){
+ document.getElementById('langs').innerHTML=languages.map(([n,c])=>`<button class="chip ${c===currentLang?'active':''}" onclick="setLang('${c}')">${n}</button>`).join('');
+ document.getElementById('voiceLang').innerHTML=languages.map(([n,c])=>`<option value="${c}" ${c===currentLang?'selected':''}>${n}</option>`).join('');
+}
+function setLang(c){currentLang=c;initLangs()}
+function listen(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){alert('Voice recognition is not supported by this browser.');return}
+ const r=new SR();r.lang=currentLang;r.interimResults=false;r.onresult=e=>{document.getElementById('msg').value=e.results[0][0].transcript;send()};r.start();
+}
+function speak(text){if(!('speechSynthesis' in window))return; speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang=currentLang;speechSynthesis.speak(u)}
+function send(){
+ const input=document.getElementById('msg'), text=input.value.trim(); if(!text)return;
+ addBubble(text,'me');input.value='';
+ setTimeout(()=>{const reply=demoReply(text);addBubble(reply,'ai');speak(reply)},350);
+}
+function addBubble(t,cls){const b=document.createElement('div');b.className='bubble '+cls;b.textContent=t;const box=document.getElementById('chatbox');box.appendChild(b);box.scrollTop=box.scrollHeight}
+function demoReply(t){
+ const x=t.toLowerCase();
+ if(/chest|سانس|breath|बेहो|unconscious|bleed|خون/.test(x)) return 'Agar symptoms severe ya life-threatening hain to AI par depend na karein. فوراً local emergency service ya nearest emergency department se rabta karein.';
+ if(/fever|bukhar|بخار/.test(x)) return 'Bukhar ki wajah mukhtalif ho sakti hai. Temperature, duration, age aur doosre symptoms batayein. Severe weakness, breathing difficulty ya persistent high fever ho to clinician se rabta karein.';
+ if(/medicine|dawai|دوا|tablet|goli/.test(x)) return 'Medicine ke bare mein safe information dene ke liye medicine ka exact naam, strength aur patient ki age batayein. Prescription ko apne doctor/pharmacist se verify karein.';
+ return 'Main aapki health information ko samajhne aur general guidance dene mein madad kar sakti hoon. Apni age, symptoms, duration aur relevant medical details batayein. Main diagnosis ka final substitute nahi hoon.';
+}
+function medInfo(){
+ const v=document.getElementById('med').value.trim();
+ document.getElementById('medresult').innerHTML=v?`<b>${v}</b><br>General medicine information ke liye exact strength, form aur intended use bhi check karein. Dose ya prescription ke liye qualified doctor/pharmacist se confirm karein.`:'Medicine ka naam enter karein. AI information ko general guidance ke taur par use karein.';
+}
+function reportName(){const f=document.getElementById('report').files[0];document.getElementById('reporttxt').textContent=f?'Selected: '+f.name:'Upload a report (PDF or image)'}
+initLangs();
+</script>
+</body></html>
